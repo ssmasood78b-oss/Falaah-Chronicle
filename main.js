@@ -1,7 +1,7 @@
 // FALAAH PORTAL - main.js
 
-const SUPABASE_URL      = window.FALAAH_CONFIG ? window.FALAAH_CONFIG.SUPABASE_URL      : 'https://hqhwphrckizfnkthdzfx.supabase.co';
-const SUPABASE_ANON_KEY = window.FALAAH_CONFIG ? window.FALAAH_CONFIG.ANON_KEY : 'sb_publishable_A_uHsj9_CSvnNbMzaA74vA_qey-gTRu';
+const SUPABASE_URL      = window.FALAAH_CONFIG ? window.FALAAH_CONFIG.SUPABASE_URL      : 'https://kxbblsqofedwqaixpboo.supabase.co';
+const SUPABASE_ANON_KEY = window.FALAAH_CONFIG ? window.FALAAH_CONFIG.ANON_KEY : 'sb_publishable_G1PXbwuoxye5E4ZtVGhxVg_Y2wlX0dP';
 
 let supabaseClient;
 let NGO_DATA = [];
