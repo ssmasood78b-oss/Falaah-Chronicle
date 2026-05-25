@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Falaah - Pakistan's NGO and social welfare directory. Search. Discover. Connect.">
+  <meta name="keywords" content="Pakistan NGOs, welfare organisations, charities Pakistan, social work, Falaah, ShahQutub">
+  <meta property="og:title" content="Falaah - Pakistan NGO Directory">
+  <meta property="og:description" content="Search, discover and connect with social welfare organisations across Pakistan.">
+  <title>Falaah - Pakistan NGO Directory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="nav-logo" onclick="showPage('home')" style="cursor:pointer">
+      <img src="falaah_logo.png" alt="Falaah" style="height:42px;width:auto">
+    </a>
+    <div class="nav-links">
+      <a data-page="home" onclick="showPage('home')">Home</a>
+      <a data-page="directory" onclick="showPage('directory')">The Falaah Chronicle</a>
+      <a data-page="about" onclick="showPage('about')">About Falaah</a>
+      <a data-page="sqwf" onclick="showPage('sqwf')">About SQWF</a>
+      <a data-page="submit" onclick="showPage('submit')">Submit an NGO</a>
+      <a data-page="contact" onclick="showPage('contact')">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="nav-lang" id="langBtn" onclick="toggleLang()">Urdu</button>
+      <button class="btn btn-primary" style="font-size:0.84rem;padding:9px 18px" onclick="showPage('directory')">Browse NGOs</button>
+    </div>
+    <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-header">
+    <img src="falaah_logo.png" alt="Falaah" style="height:36px;width:auto">
+    <button onclick="closeMobileMenu()" style="font-size:1.4rem;color:var(--text-muted);line-height:1">X</button>
+  </div>
+  <div class="mobile-menu-links">
+    <a onclick="showPage('home')">Home</a>
+    <a onclick="showPage('directory')">The Falaah Chronicle</a>
+    <a onclick="showPage('about')">About Falaah</a>
+    <a onclick="showPage('sqwf')">About SQWF</a>
+    <a onclick="showPage('submit')">Submit an NGO</a>
+    <a onclick="showPage('contact')">Contact</a>
+  </div>
+  <div style="margin-top:28px;display:flex;flex-direction:column;gap:10px">
+    <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="showPage('directory')">Browse NGOs</button>
+    <button class="btn btn-outline" style="width:100%;justify-content:center" onclick="toggleLang()">Urdu / English</button>
+  </div>
+</div>
+
+<div class="page active" id="page-home">
+
+  <section class="hero">
+    <div class="hero-bg-shape s1"></div>
+    <div class="hero-bg-shape s2"></div>
+    <div class="hero-bg-shape s3"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="eyebrow">Pakistan&apos;s NGO Directory</div>
+        <h1 class="display-title">Search. Discover.<br>Connect.</h1>
+        <div class="hero-tagline">
+          <span>Find the cause</span>
+          <span class="dot">.</span>
+          <span>that calls to you</span>
+        </div>
+        <p class="hero-desc">Falaah brings Pakistan's entire social welfare landscape into one free, searchable directory, connecting citizens, donors and volunteers with organisations doing meaningful work across the country.</p>
+        <div class="hero-actions">
+          <button class="btn btn-olive" onclick="showPage('directory')">Explore the Directory</button>
+          <button class="btn btn-outline-white" onclick="showPage('submit')">Submit an NGO</button>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="num">250<span>+</span></div>
+            <div class="lbl">NGOs Listed</div>
+          </div>
+          <div class="hero-stat">
+            <div class="num">10</div>
+            <div class="lbl">Social Work Categories</div>
+          </div>
+          <div class="hero-stat">
+            <div class="num">7</div>
+            <div class="lbl">Provinces Covered</div>
+          </div>
+          <div class="hero-stat">
+            <div class="num">Free</div>
+            <div class="lbl">Always and Forever</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--white)">
+    <div class="container">
+      <div class="text-center">
+        <div class="eyebrow" style="justify-content:center">Browse by Cause</div>
+        <h2 class="section-title">What kind of work matters to you?</h2>
+        <p class="section-subtitle">Ten categories of social work, hundreds of organisations making change happen across Pakistan.</p>
+      </div>
+      <div id="categoriesGrid" class="categories-grid"></div>
+      <div style="text-align:center;margin-top:32px">
+        <button class="btn btn-primary" onclick="showPage('directory')">View Full Directory</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="text-center">
+        <div class="eyebrow" style="justify-content:center">How It Works</div>
+        <h2 class="section-title">Simple. Open. Free.</h2>
+        <p class="section-subtitle">No login required. No fees. Just a public resource for Pakistan's civil society.</p>
+      </div>
+      <div class="how-grid">
+        <div class="pillar-card">
+          <div class="pillar-title">Search and Filter</div>
+          <p class="pillar-text">Find NGOs by name, category, or province instantly, with no account needed.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-title">Read Their Profile</div>
+          <p class="pillar-text">Each card shows the description, focal person, contact details and direct website link.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-title">Connect and Contribute</div>
+          <p class="pillar-text">Reach out to volunteer, donate, or simply share the work being done.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-title">Grow the Directory</div>
+          <p class="pillar-text">Anyone can submit an NGO. We review and publish it, keeping Falaah current.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <div class="container">
+      <div class="cta-inner">
+        <div>
+          <h2 class="section-title">Know an NGO we are missing?</h2>
+          <p style="color:var(--text-muted);margin-top:8px;font-size:0.96rem">Help us build the most complete directory of social work in Pakistan.</p>
+        </div>
+        <button class="btn btn-primary" onclick="showPage('submit')" style="flex-shrink:0">Submit an NGO</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page" id="page-directory">
+
+  <div class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a onclick="showPage('home')">Home</a><span class="sep">></span><span>Directory</span></div>
+      <div class="eyebrow">Full Directory</div>
+      <h1 class="section-title">Pakistan NGO Directory</h1>
+      <p class="section-subtitle">Browse, search and filter all listed social welfare organisations.</p>
+    </div>
+  </div>
+
+  <div class="search-bar-section">
+    <div class="container">
+      <div class="search-bar-inner">
+        <div class="search-input-wrap">
+          <span class="search-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </span>
+          <input type="search" id="mainSearch" class="search-input" placeholder="Search by name, category, focal person, location" autocomplete="off">
+        </div>
+        <select id="provinceFilter" class="filter-select"></select>
+        <button class="btn btn-ghost" onclick="clearFilters()">Clear</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container dir-layout">
+    <aside class="sidebar-cats-wrap">
+      <div class="sidebar-label">Filter by Category</div>
+      <div class="sidebar-cats" id="sidebarCats"></div>
+    </aside>
+    <div>
+      <div class="ngo-section-header">
+        <h2 class="section-title" id="ngoSectionTitle" style="font-size:1.15rem">All NGOs</h2>
+        <span id="ngoCount" style="font-size:0.84rem;color:var(--text-muted)"></span>
+      </div>
+      <div class="ngo-list" id="ngoList"></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page" id="page-about">
+
+  <div class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a onclick="showPage('home')">Home</a><span class="sep">></span><span>About Falaah</span></div>
+      <div class="eyebrow">Our Purpose</div>
+      <h1 class="section-title">What is Falaah?</h1>
+      <p class="section-subtitle">A free, public resource for Pakistan's social welfare landscape.</p>
+    </div>
+  </div>
+
+  <section class="section" style="background:var(--white)">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-visual">
+          <div class="about-visual-letter">F</div>
+          <div class="about-visual-quote">"Falaah" - prosperity, welfare, flourishing</div>
+        </div>
+        <div class="about-content">
+          <div class="eyebrow">The Story</div>
+          <h2 class="section-title" style="margin-bottom:20px">Built to make social work visible.</h2>
+          <p>Pakistan is home to thousands of NGOs doing extraordinary work, from the mountains of Gilgit-Baltistan to the coastal communities of Sindh. Yet for most people, finding and connecting with these organisations is difficult and fragmented.</p>
+          <p>Falaah was created to change that. Developed as a community service initiative in collaboration with <strong>Shah Qutub Welfare Foundation (SQWF)</strong>, it is a free, openly accessible directory that brings Pakistan's social work landscape into one searchable, categorised resource.</p>
+          <p>The name Falaah comes from Arabic and Urdu, meaning prosperity, welfare and flourishing. A word that sits at the heart of every organisation listed here.</p>
+          <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap">
+            <button class="btn btn-primary" onclick="showPage('directory')">Explore the Directory</button>
+            <button class="btn btn-outline" onclick="showPage('submit')">Submit an NGO</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="text-center">
+        <div class="eyebrow" style="justify-content:center">Our Principles</div>
+        <h2 class="section-title">What guides this project</h2>
+      </div>
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-title">Always Free</div>
+          <p class="pillar-text">Falaah will never charge NGOs to be listed or users to access information. Public benefit is the only purpose.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-title">Verified Data</div>
+          <p class="pillar-text">All information is compiled from publicly available sources. We do not make editorial judgements on any listed organisation.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-title">Inclusive Coverage</div>
+          <p class="pillar-text">We aim to represent all provinces, all causes, and all scales of social work, from national foundations to local community efforts.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-title">Community Driven</div>
+          <p class="pillar-text">Anyone can submit an NGO for listing. The directory grows with the community's knowledge and contributions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="page" id="page-sqwf">
+
+  <div class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a onclick="showPage('home')">Home</a><span class="sep">></span><span>About SQWF</span></div>
+      <div class="eyebrow">The Organisation Behind Falaah</div>
+      <h1 class="section-title">Shah Qutub Welfare Foundation</h1>
+      <p class="section-subtitle">Empowering communities through education, healthcare and social support.</p>
+    </div>
+  </div>
+
+  <section class="section" style="background:var(--white)">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-content">
+          <div class="eyebrow">Who We Are</div>
+          <h2 class="section-title" style="margin-bottom:20px">A beacon of hope and compassion.</h2>
+          <p>The Shah Qutub Welfare Foundation (SQWF) is a non-profit organisation dedicated to making a positive impact on the lives of Pakistan's most vulnerable. Founded on the principles of service and community, SQWF works to uplift underprivileged individuals through education, healthcare and social support.</p>
+          <p>With unwavering commitment, SQWF aims to create a brighter future for all, empowering individuals to break the cycle of poverty and adversity through collective effort and philanthropic spirit.</p>
+          <p>Falaah is one of SQWF's initiatives to strengthen Pakistan's civil society infrastructure, making it easier for citizens to find, support and engage with welfare organisations across the country.</p>
+          <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap">
+            <a href="https://sqw.foundation" target="_blank" rel="noopener" class="btn btn-primary">Visit sqw.foundation</a>
+            <button class="btn btn-outline" onclick="showPage('contact')">Get in Touch</button>
+          </div>
+        </div>
+        <div class="about-visual" style="text-align:left;padding:40px">
+          <p style="font-family:var(--font-display);font-size:1.1rem;color:var(--navy);font-style:italic;line-height:1.6;margin-bottom:20px">"Empowering underprivileged communities through education, healthcare and social support."</p>
+          <p style="font-size:0.8rem;color:var(--text-light)">SQWF Mission Statement</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sqwf-band">
+    <div class="container">
+      <div class="sqwf-inner">
+        <div class="sqwf-content">
+          <div class="eyebrow" style="color:var(--olive-light)">What SQWF Does</div>
+          <h2 class="section-title">Working across Pakistan's most pressing needs.</h2>
+          <p>SQWF implements projects across education, healthcare access, disaster relief and community development. The foundation works in underserved regions and continues to grow its reach through partnerships and community mobilisation.</p>
+          <a href="https://sqw.foundation/our-projects/" target="_blank" rel="noopener" class="btn btn-olive">View SQWF's Projects</a>
+        </div>
+        <div class="sqwf-facts">
+          <div class="sqwf-fact"><div class="num">Karachi</div><div class="lbl">HQ, SMCHS, Shahrah-e-Faisal</div></div>
+          <div class="sqwf-fact"><div class="num">info@sqwf.org</div><div class="lbl">Official contact email</div></div>
+          <div class="sqwf-fact"><div class="num">+92 321 5219360</div><div class="lbl">Phone number</div></div>
+          <div class="sqwf-fact"><div class="num">@sqwfpk</div><div class="lbl">Social media, all platforms</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page" id="page-submit">
+
+  <div class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a onclick="showPage('home')">Home</a><span class="sep">></span><span>Submit an NGO</span></div>
+      <div class="eyebrow">Grow the Directory</div>
+      <h1 class="section-title">Submit an NGO</h1>
+      <p class="section-subtitle">Know an organisation doing meaningful work in Pakistan? Help us list them.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="form-wrap">
+        <div style="margin-bottom:28px">
+          <h2 style="font-family:var(--font-display);font-size:1.25rem;color:var(--navy-deeper);margin-bottom:8px">NGO Submission Form</h2>
+          <p style="font-size:0.86rem;color:var(--text-muted)">All submissions are reviewed before publishing. Fields marked <span style="color:var(--olive)">*</span> are required.</p>
+        </div>
+        <form id="submitNGOForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="ngoName">NGO Name <span class="req">*</span></label>
+              <input type="text" id="ngoName" class="form-input" placeholder="e.g. Edhi Foundation" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="submitCategory">Category <span class="req">*</span></label>
+              <select id="submitCategory" class="form-select" required></select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="ngoDesc">Description of Work <span class="req">*</span></label>
+            <textarea id="ngoDesc" class="form-textarea" placeholder="Briefly describe what this organisation does, who they serve, and where they operate." required></textarea>
+            <div class="form-hint">2 to 4 sentences. Focus on primary work and beneficiaries.</div>
+          </div>
+          <div class="form-divider"></div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="focalPerson">Focal Person / Key Contact</label>
+              <input type="text" id="focalPerson" class="form-input" placeholder="e.g. Dr. Amjad Saqib (Founder)">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="contactNumber">Contact Number</label>
+              <input type="tel" id="contactNumber" class="form-input" placeholder="+92-XX-XXXXXXXX">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="ngoWebsite">Website / Social Media</label>
+              <input type="url" id="ngoWebsite" class="form-input" placeholder="https://example.org">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="ngoLocation">Location / City</label>
+              <input type="text" id="ngoLocation" class="form-input" placeholder="e.g. Karachi (National)">
+            </div>
+          </div>
+          <div class="form-divider"></div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="submitterName">Your Name <span class="req">*</span></label>
+              <input type="text" id="submitterName" class="form-input" placeholder="Your full name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="submitterEmail">Your Email <span class="req">*</span></label>
+              <input type="email" id="submitterEmail" class="form-input" placeholder="your@email.com" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="relation">Your Relation to the NGO</label>
+            <select id="relation" class="form-select">
+              <option value="">Select</option>
+              <option>I work for this NGO</option>
+              <option>I volunteer for this NGO</option>
+              <option>I am a donor / supporter</option>
+              <option>I found this NGO independently</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:24px">
+            <input type="checkbox" id="accuracy" style="margin-top:3px;accent-color:var(--navy);width:15px;height:15px;flex-shrink:0" required>
+            <label for="accuracy" style="font-size:0.84rem;color:var(--text-muted);cursor:pointer;line-height:1.5">I confirm that the information provided is accurate to the best of my knowledge and is sourced from publicly available data.</label>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:14px;font-size:0.95rem">Submit for Review</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="page" id="page-contact">
+
+  <div class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a onclick="showPage('home')">Home</a><span class="sep">></span><span>Contact</span></div>
+      <div class="eyebrow">Get in Touch</div>
+      <h1 class="section-title">Contact Us</h1>
+      <p class="section-subtitle">Questions, corrections or partnership enquiries. We would love to hear from you.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="contact-item">
+            <div><div class="contact-lbl">Email</div><div class="contact-val">info@sqwf.org</div></div>
+          </div>
+          <div class="contact-item">
+            <div><div class="contact-lbl">Phone</div><div class="contact-val">+92 321 5219360</div></div>
+          </div>
+          <div class="contact-item">
+            <div><div class="contact-lbl">Address</div><div class="contact-val">102 Emarah Suites, SMCHS, Shahrah-e-Faisal, Karachi</div></div>
+          </div>
+          <div class="contact-item">
+            <div><div class="contact-lbl">Website</div><div class="contact-val"><a href="https://sqw.foundation" target="_blank" rel="noopener" style="color:var(--navy);text-decoration:underline">sqw.foundation</a></div></div>
+          </div>
+          <div style="padding:20px;background:var(--navy-pale);border-radius:var(--r-md);border:1.5px solid rgba(55,70,149,0.15)">
+            <p style="font-size:0.84rem;color:var(--text-muted);line-height:1.7"><strong style="color:var(--navy-deeper)">For NGO corrections:</strong> Spotted an error in a listing? Email us with the NGO name and the corrected detail. We aim to review all updates within 5 to 7 working days.</p>
+          </div>
+        </div>
+        <div class="form-wrap" style="margin:0;padding:36px">
+          <h2 style="font-family:var(--font-display);font-size:1.15rem;color:var(--navy-deeper);margin-bottom:20px">Send a Message</h2>
+          <form id="contactForm" novalidate>
+            <div class="form-group">
+              <label class="form-label" for="cName">Your Name <span class="req">*</span></label>
+              <input type="text" id="cName" class="form-input" placeholder="Full name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cEmail">Email Address <span class="req">*</span></label>
+              <input type="email" id="cEmail" class="form-input" placeholder="your@email.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cSubject">Subject</label>
+              <select id="cSubject" class="form-select">
+                <option>General Enquiry</option>
+                <option>NGO Correction / Update</option>
+                <option>Partnership / Collaboration</option>
+                <option>Technical Issue</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cMsg">Message <span class="req">*</span></label>
+              <textarea id="cMsg" class="form-textarea" placeholder="How can we help?" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="page" id="page-legal">
+  <div class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a onclick="showPage('home')">Home</a><span class="sep">></span><span>Legal</span></div>
+      <h1 class="section-title">Privacy Policy and Terms of Use</h1>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container" style="max-width:720px">
+      <div style="display:flex;flex-direction:column;gap:28px">
+        <div>
+          <h2 style="font-family:var(--font-display);font-size:1.2rem;color:var(--navy-deeper);margin-bottom:10px">1. About This Portal</h2>
+          <p style="color:var(--text-muted);font-size:0.94rem;line-height:1.78">Falaah is a free, publicly accessible NGO directory operated by Shah Qutub Welfare Foundation (SQWF). It is provided as a public resource and does not represent, endorse, or verify the work of any listed organisation beyond what is publicly available.</p>
+        </div>
+        <div>
+          <h2 style="font-family:var(--font-display);font-size:1.2rem;color:var(--navy-deeper);margin-bottom:10px">2. Data Sources</h2>
+          <p style="color:var(--text-muted);font-size:0.94rem;line-height:1.78">All information is compiled from publicly available sources including NGO websites, official publications and public registries. Falaah does not collect or publish any private or confidential information about listed organisations.</p>
+        </div>
+        <div>
+          <h2 style="font-family:var(--font-display);font-size:1.2rem;color:var(--navy-deeper);margin-bottom:10px">3. Accuracy</h2>
+          <p style="color:var(--text-muted);font-size:0.94rem;line-height:1.78">While we make every effort to ensure accuracy, Falaah cannot guarantee the completeness or currency of all listings. If you find an error, contact us at info@sqwf.org.</p>
+        </div>
+        <div>
+          <h2 style="font-family:var(--font-display);font-size:1.2rem;color:var(--navy-deeper);margin-bottom:10px">4. Privacy Policy</h2>
+          <p style="color:var(--text-muted);font-size:0.94rem;line-height:1.78">Falaah does not collect personal data from visitors beyond what is voluntarily submitted through our contact or submission forms. Submissions are used solely to update the directory or respond to enquiries. We do not sell or share submitted data.</p>
+        </div>
+        <div>
+          <h2 style="font-family:var(--font-display);font-size:1.2rem;color:var(--navy-deeper);margin-bottom:10px">5. Intellectual Property</h2>
+          <p style="color:var(--text-muted);font-size:0.94rem;line-height:1.78">NGO names, logos and descriptions remain the intellectual property of their respective organisations. They are displayed solely for identification purposes within this directory.</p>
+        </div>
+        <p style="font-size:0.8rem;color:var(--text-light)">Last updated: May 2026</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="name">Falaah</div>
+        <p>Pakistan's free, comprehensive directory of social welfare organisations, connecting citizens to the causes that matter.</p>
+        <p style="font-size:0.78rem;color:rgba(255,255,255,0.28)">An initiative of Shah Qutub Welfare Foundation</p>
+      </div>
+      <div class="footer-col">
+        <h4>Directory</h4>
+        <ul>
+          <li><a onclick="showPage('directory')">Browse All NGOs</a></li>
+          <li><a onclick="selectCategory('healthcare','Healthcare and Medical Services')">Healthcare</a></li>
+          <li><a onclick="selectCategory('education','Education and Literacy')">Education</a></li>
+          <li><a onclick="selectCategory('women','Women Empowerment and Gender Equality')">Women Empowerment</a></li>
+          <li><a onclick="selectCategory('disaster','Disaster Relief and Humanitarian Aid')">Disaster Relief</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <ul>
+          <li><a onclick="showPage('about')">About Falaah</a></li>
+          <li><a onclick="showPage('sqwf')">About SQWF</a></li>
+          <li><a onclick="showPage('submit')">Submit an NGO</a></li>
+          <li><a onclick="showPage('contact')">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a onclick="showPage('legal')">Privacy Policy</a></li>
+          <li><a onclick="showPage('legal')">Terms of Use</a></li>
+          <li><a href="https://sqw.foundation" target="_blank" rel="noopener">sqw.foundation</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>(c) 2026 Falaah. An initiative of <a href="https://sqw.foundation" target="_blank" rel="noopener">Shah Qutub Welfare Foundation</a></p>
+      <p>All NGO data sourced from publicly available information.</p>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="alert" aria-live="polite"></div>
+
+<script src="/config.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
